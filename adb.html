@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ADB Journey</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Poppins', sans-serif;
+        }
+    </style>
+</head>
+
+<body class="min-h-screen bg-gradient-to-br from-blue-50 via-teal-50 to-cyan-50">
+    <header class="bg-black/80 backdrop-blur-md shadow-sm border-b border-white/20 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-6">
+                <div class="flex items-center space-x-3">
+                    <h1
+                        class="text-2xl font-bold bg-gradient-to-r from-blue-700 to-cyan-400 bg-clip-text text-transparent">
+                        BSCS Tour 2025
+                    </h1>
+                </div>
+                <nav class="hidden md:flex space-x-8">
+                    <a href="index.html"
+                        class="text-white hover:text-blue-300 font-medium transition-colors">Home</a>
+                    <a href="speakers.html"
+                        class="text-white hover:text-blue-300 font-medium transition-colors">Speakers</a>
+                    <a href="venue.html"
+                        class="text-white hover:text-blue-300 font-medium transition-colors">Venue</a>
+                    <a href="schedule.html"  class="text-white hover:text-blue-300 font-medium transition-colors">Schedule</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+
+    <!-- ADB -->
+    <section class="py-16 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+            <div class="p-0 md:p-0 mb-8">
+                <!-- Back to Home -->
+                <div class="mb-6">
+                    <a href="index.html" class="inline-flex items-center text-gray-600 hover:text-blue-600 transition-colors font-medium">
+                        <i class="fas fa-arrow-left mr-2"></i>
+                        Back to Home
+                    </a>
+                </div>
+                <div class="mb-12 flex flex-col items-center">
+                    <h2 class="text-5xl md:text-6xl font-bold text-blue-700 mb-2 font-poppins text-center">Asian Development Bank</h2>
+                    <p class="text-2xl text-gray-600 font-inter mb-4 text-center">ADB Avenue, Mandaluyong City</p>
+                    <div class="flex items-center space-x-6 text-sm text-gray-500 font-inter mb-6 justify-center">
+                        <div class="flex items-center">
+                            <i class="fas fa-user mr-2"></i>
+                            <span class="text-blue-600 font-semibold">By Jaythoon Sahibul Jr.</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-calendar mr-2"></i>
+                            June 11, 2025
+                        </div>
+                    </div>
+                    <div class="w-full max-w-4xl h-96 mx-auto mb-6 relative group">
+                        <div id="adb-carousel-images" class="w-full h-96 rounded-2xl overflow-hidden shadow-lg relative">
+                            <img src="assets/images/adb.jpg" alt="Asian Development Bank" class="adb-carousel-img w-full h-full object-cover rounded-2xl absolute inset-0 transition-opacity duration-500 opacity-100" />
+                            <img src="assets/images/adbimage2.jpg" alt="ADB Event Highlights" class="adb-carousel-img w-full h-full object-cover rounded-2xl absolute inset-0 transition-opacity duration-500 opacity-0" />
+                        </div>
+                        <button id="adb-carousel-prev" class="absolute left-2 top-1/2 -translate-y-1/2 bg-transparent hover:bg-blue-100/80 text-blue-700 rounded-full p-2 shadow transition-all z-10 opacity-0 group-hover:opacity-100"><i class="fas fa-chevron-left"></i></button>
+                        <button id="adb-carousel-next" class="absolute right-2 top-1/2 -translate-y-1/2 bg-transparent hover:bg-blue-100/80 text-blue-700 rounded-full p-2 shadow transition-all z-10 opacity-0 group-hover:opacity-100"><i class="fas fa-chevron-right"></i></button>
+                        <div class="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-10">
+                            <button class="adb-carousel-indicator w-3 h-3 rounded-full bg-blue-400 opacity-80"></button>
+                            <button class="adb-carousel-indicator w-3 h-3 rounded-full bg-blue-200 opacity-80"></button>
+                        </div>
+                    </div>
+                    <script>
+                        const adbImages = document.querySelectorAll('.adb-carousel-img');
+                        const adbIndicators = document.querySelectorAll('.adb-carousel-indicator');
+                        let adbCurrent = 0;
+                        function showAdbImage(idx) {
+                            adbImages.forEach((img, i) => img.style.opacity = i === idx ? '1' : '0');
+                            adbIndicators.forEach((dot, i) => dot.classList.toggle('bg-blue-400', i === idx));
+                            adbIndicators.forEach((dot, i) => dot.classList.toggle('bg-blue-200', i !== idx));
+                        }
+                        document.getElementById('adb-carousel-prev').onclick = () => {
+                            adbCurrent = (adbCurrent - 1 + adbImages.length) % adbImages.length;
+                            showAdbImage(adbCurrent);
+                        };
+                        document.getElementById('adb-carousel-next').onclick = () => {
+                            adbCurrent = (adbCurrent + 1) % adbImages.length;
+                            showAdbImage(adbCurrent);
+                        };
+                        adbIndicators.forEach((dot, i) => dot.onclick = () => { adbCurrent = i; showAdbImage(adbCurrent); });
+                        showAdbImage(adbCurrent);
+                    </script>
+                </div>
+                <div class="prose max-w-4xl w-full text-gray-700 font-inter text-lg leading-relaxed flex flex-col items-center mx-auto">
+                    <p class="mb-6">We visited the <span class="font-semibold text-blue-700">Asian Development Bank (ADB)</span> in Mandaluyong City. Thanks to CXC and IBPAP, we got to see how a global development bank works and how IT is used to make a difference in Asia and the Pacific.</p>
+                    <p class="mb-6">We started with a tour of the ADB Library and History Gallery, learning about ADB’s legacy and its impact on development. We also visited the Function Hall, where important meetings happen.</p>
+                    <p class="mb-6">During the program, ADB leaders explained their mission and how they support growth and cooperation in the region. We also met the CXC team, who told us about global careers and how they help companies find and manage talent.</p>
+                    <p class="mb-6">One of the highlights was a fireside chat with ADB’s IT directors. They shared their career stories and gave us advice on skills and working in international organizations. We also got to ask questions and learn about IT’s role in development work.</p>
+                    <p class="mb-6">We were proud to present our project, RePay—a micro-lending app we built for our Software Engineering class. The ADB team liked our idea and talked with us about fintech and how tech can help communities.</p>
+                    <p class="mb-6">We also learned about ADB’s Future IT Leaders Graduate Program, which helps young tech professionals grow their careers. Touring the ADB offices, we saw how they support their employees and create an inclusive work culture.</p>
+                    <p class="mb-6">The visit ended with networking and closing remarks. We left inspired by what we saw and learned, and grateful for the chance to connect our classroom lessons with real-world IT and development work.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+   
+
+    <!-- Footer -->
+    <footer class="bg-black/90 backdrop-blur-md text-white py-12 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-center space-y-6 md:space-y-0">
+                <div class="flex items-center space-x-3">
+                    <span class="text-xl font-bold">BSCS Educational Tour 2025</span>
+                </div>
+
+                <div class="flex items-center space-x-6">
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                        <i class="fab fa-github text-2xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                        <i class="fab fa-linkedin text-2xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                        <i class="fab fa-twitter text-2xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                        <i class="fab fa-instagram text-2xl"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+
+</html>

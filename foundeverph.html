@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Foundever Ph Journey</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Poppins', sans-serif;
+        }
+    </style>
+</head>
+
+<body class="min-h-screen bg-gradient-to-br from-emerald-50 via-teal-50 to-cyan-50">
+    <header class="bg-black/80 backdrop-blur-md shadow-sm border-b border-white/20 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-6">
+                <div class="flex items-center space-x-3">
+                    <h1
+                        class="text-2xl font-bold bg-gradient-to-r from-blue-700 to-cyan-400 bg-clip-text text-transparent">
+                        BSCS Tour 2025
+                    </h1>
+                </div>
+                <nav class="hidden md:flex space-x-8">
+                    <a href="index.html"
+                        class="text-white hover:text-blue-300 font-medium transition-colors">Home</a>
+                    <a href="speakers.html"
+                        class="text-white hover:text-blue-300 font-medium transition-colors">Speakers</a>
+                    <a href="venue.html"
+                        class="text-white hover:text-blue-300 font-medium transition-colors">Venue</a>
+                    <a href="schedule.html"  class="text-white hover:text-blue-300 font-medium transition-colors">Schedule</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+
+    <!-- Foundever PH -->
+    <section class="py-16 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+            <div class="p-0 md:p-0 mb-8">
+                <!-- Back to Home -->
+                <div class="mb-6">
+                    <a href="index.html" class="inline-flex items-center text-gray-600 hover:text-blue-600 transition-colors font-medium">
+                        <i class="fas fa-arrow-left mr-2"></i>
+                        Back to Home
+                    </a>
+                </div>
+                <div class="mb-12 flex flex-col items-center">
+                    <h2 class="text-5xl md:text-6xl font-bold text-blue-700 mb-2 font-poppins text-center">Foundever PH</h2>
+                    <p class="text-2xl text-gray-600 font-inter mb-4 text-center">Technopoint Building, Pasig City</p>
+                    <div class="flex items-center space-x-6 text-sm text-gray-500 font-inter mb-6 justify-center">
+                        <div class="flex items-center">
+                            <i class="fas fa-user mr-2"></i>
+                            <span class="text-blue-600 font-semibold">By Jaythoon Sahibul Jr.</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-calendar mr-2"></i>
+                            June 9, 2025
+                        </div>
+                    </div>
+                    <div class="w-full max-w-4xl h-96 mx-auto mb-6 relative group">
+                        <!-- Carousel Images -->
+                        <div id="carousel-images" class="w-full h-96 rounded-2xl overflow-hidden shadow-lg relative">
+                            <img src="assets/images/foundever.jpg" alt="Foundever Philippines" class="carousel-img w-full h-full object-cover rounded-2xl absolute inset-0 transition-opacity duration-500 opacity-100" />
+                            <img src="assets/images/foundever2.jpg" alt="Foundever Team" class="carousel-img w-full h-full object-cover rounded-2xl absolute inset-0 transition-opacity duration-500 opacity-0" />
+                        </div>
+                        <!-- Carousel Controls -->
+                        <button id="carousel-prev" class="absolute left-2 top-1/2 -translate-y-1/2 bg-transparent hover:bg-blue-100/80 text-blue-700 rounded-full p-2 shadow transition-all z-10 opacity-0 group-hover:opacity-100"><i class="fas fa-chevron-left"></i></button>
+                        <button id="carousel-next" class="absolute right-2 top-1/2 -translate-y-1/2 bg-transparent hover:bg-blue-100/80 text-blue-700 rounded-full p-2 shadow transition-all z-10 opacity-0 group-hover:opacity-100"><i class="fas fa-chevron-right"></i></button>
+                        <!-- Carousel Indicators -->
+                        <div class="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-10">
+                            <button class="carousel-indicator w-3 h-3 rounded-full bg-blue-400 opacity-80"></button>
+                            <button class="carousel-indicator w-3 h-3 rounded-full bg-blue-200 opacity-80"></button>
+                        </div>
+                    </div>
+                    <script>
+                        const images = document.querySelectorAll('.carousel-img');
+                        const indicators = document.querySelectorAll('.carousel-indicator');
+                        let current = 0;
+                        function showImage(idx) {
+                            images.forEach((img, i) => img.style.opacity = i === idx ? '1' : '0');
+                            indicators.forEach((dot, i) => dot.classList.toggle('bg-blue-400', i === idx));
+                            indicators.forEach((dot, i) => dot.classList.toggle('bg-blue-200', i !== idx));
+                        }
+                        document.getElementById('carousel-prev').onclick = () => {
+                            current = (current - 1 + images.length) % images.length;
+                            showImage(current);
+                        };
+                        document.getElementById('carousel-next').onclick = () => {
+                            current = (current + 1) % images.length;
+                            showImage(current);
+                        };
+                        indicators.forEach((dot, i) => dot.onclick = () => { current = i; showImage(current); });
+                        showImage(current);
+                    </script>
+                </div>
+                <div class="prose max-w-4xl w-full text-gray-700 font-inter text-lg leading-relaxed flex flex-col items-center mx-auto">
+                    <p class="mb-6">We visited <span class="font-semibold text-blue-700">Foundever PH</span> in Pasig City as part of our school’s mission to give us real-world experience in the tech and IT-BPM industry.</p>
+                    <p class="mb-6">The Foundever team welcomed us warmly and gave us a tour of their impressive facility. We learned how they use technology like AI, cloud computing, and data analytics to help big brands with customer service. We also had insightful discussions with their operations and IT teams about digital transformation, data privacy, agile methods, and cybersecurity.</p>
+                    <p class="mb-6">We met <span class="font-semibold text-blue-700">Ms. Zoe Diaz De Rivera</span> from IBPAP, who gave us an overview of the IT-BPM industry in the Philippines. She talked about the industry’s growth, the variety of jobs available, and the importance of skills like communication, critical thinking, and adaptability.</p>
+                    <p class="mb-6">One key takeaway was how broad the opportunities are in IT-BPM. It’s not just about call centers—it’s about innovation and technology. The visit made us realize the importance of building a strong digital portfolio and being open to continuous learning.</p>
+                    <p class="mb-6">We ended the day with a group photo session and tokens of appreciation. This experience truly opened our eyes to the possibilities in tech, and I’m grateful our school provides opportunities to connect classroom learning with real-world industry practice.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Footer -->
+    <footer class="bg-black/90 backdrop-blur-md text-white py-12 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-center space-y-6 md:space-y-0">
+                <div class="flex items-center space-x-3">
+                    <span class="text-xl font-bold">BSCS Educational Tour 2025</span>
+                </div>
+
+                <div class="flex items-center space-x-6">
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                        <i class="fab fa-github text-2xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                        <i class="fab fa-linkedin text-2xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                        <i class="fab fa-twitter text-2xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                        <i class="fab fa-instagram text-2xl"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+
+</html>
